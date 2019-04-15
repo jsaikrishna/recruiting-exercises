@@ -1,6 +1,6 @@
 Solution to the inventory-allocator problem:
 
-For running the program, just load the files in src directory to any Java Compactable IDE and iterate through deliver -> Inventory -> src -> exercises -> TestCases.java
+For running the program, just load the files in src directory to any Java Compactable IDE and iterate the files through deliver -> Inventory -> src -> exercises -> TestCases.java
 
 Run the TestCases.java and outputs for the different test-cases were output as either true/false : True is when the actual answer is same as the expected answer and false is when the actual answer is not same as expected answer. All the example testcases and the actual answers for testcases are written in TestCases.java file.
 
