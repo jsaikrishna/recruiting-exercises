@@ -1,0 +1,267 @@
+package exercises;
+
+import java.util.*;
+
+
+public class TestCases {
+	HashMap<String,Long> inputOrder;
+	List<HashMap> output_list;
+	
+	public TestCases() {
+		this.inputOrder = new LinkedHashMap<>();
+		this.output_list = new ArrayList<>();
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public boolean testCase1() {
+		
+		inputOrder = new LinkedHashMap<>();
+		output_list = new ArrayList<>();
+		
+		// Adding Input Order
+		inputOrder.put("apple", (long) 1);
+		
+		// Adding StorageCenter Data/Inventory Data
+		List<StorageCenter> StorageCenterList = new ArrayList<>();
+		StorageCenter owd = new StorageCenter("owd");
+		owd.setStorageCenterStock("apple",(long) 1);
+		StorageCenterList.add(owd);
+		
+		InventoryAllocator ia = new InventoryAllocator();
+		
+		List<HashMap> result_list = ia.findCheapShipment(inputOrder, StorageCenterList);
+		
+		//System.out.println("Hello");
+		//System.out.println(result_list.size());
+		
+		for(HashMap<String,HashMap<String,Long>> tm : result_list) {
+			for(String in: tm.keySet()) {
+				//System.out.println(in);
+				for(String ina: tm.get(in).keySet()) {
+					//System.out.println(ina);
+					//System.out.println(tm.get(in).get(ina));
+				}
+			}
+		}
+		
+		//Adding the desired output
+				//System.out.println("Hi");
+				Map<String, HashMap<String, Long>> desiredMap = new LinkedHashMap<String, HashMap<String, Long>>();
+				HashMap<String, Long> temp_map=new LinkedHashMap<>();
+				temp_map.put("apple", (long) 1);
+				desiredMap.put("owd", temp_map);
+				output_list.add((HashMap) desiredMap);
+				
+		if(output_list.equals(result_list))
+			return true;
+		return false;
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public boolean testCase2() {
+
+		inputOrder = new LinkedHashMap<>();
+		output_list = new ArrayList<>();
+
+		// Adding Input Order
+		inputOrder.put("apple", (long) 1);
+
+		// Adding StorageCenter Data/Inventory Data
+		List<StorageCenter> StorageCenterList = new ArrayList<>();
+		StorageCenter owd = new StorageCenter("owd");
+		owd.setStorageCenterStock("apple",(long) 0);
+		StorageCenterList.add(owd);
+
+		InventoryAllocator ia = new InventoryAllocator();
+
+		//Adding the desired output
+
+
+		List<HashMap> result_list = ia.findCheapShipment(inputOrder, StorageCenterList);
+		if(output_list.equals(result_list))
+			return true;
+		return false;
+	}
+
+	@SuppressWarnings("rawtypes")
+	public boolean testCase3() {
+
+		inputOrder = new LinkedHashMap<>();
+		output_list = new ArrayList<>();
+
+		// Adding Input Order
+		inputOrder.put("apple", (long) 10);
+
+		// Adding StorageCenter Data/Inventory Data
+		List<StorageCenter> StorageCenterList = new ArrayList<>();
+		
+		StorageCenter owd = new StorageCenter("owd");
+		owd.setStorageCenterStock("apple",(long) 5);
+		StorageCenterList.add(owd);
+
+		StorageCenter dm = new StorageCenter("dm");
+		dm.setStorageCenterStock("apple",(long) 5);
+		StorageCenterList.add(dm);
+
+		InventoryAllocator ia = new InventoryAllocator();
+
+		List<HashMap> result_list = ia.findCheapShipment(inputOrder, StorageCenterList);
+		//System.out.println(result_list.size());
+		
+		
+		//Adding the desired output
+
+		Map<String, HashMap<String, Long>> desiredMap = new LinkedHashMap<String, HashMap<String, Long>>();
+		HashMap<String, Long> temp_map=new LinkedHashMap<>();
+		temp_map.put("apple", (long) 5);
+		desiredMap.put("owd", temp_map);
+		output_list.add((HashMap) desiredMap);
+
+		Map<String, HashMap<String, Long>> desiredMap2 = new LinkedHashMap<String, HashMap<String, Long>>();
+		HashMap<String, Long> temp_map2=new LinkedHashMap<>();
+		temp_map2.put("apple", (long) 5);
+		desiredMap2.put("dm", temp_map);
+		output_list.add((HashMap) desiredMap2);
+		
+		//System.out.println(output_list.size());
+		if(output_list.equals(result_list))
+			return true;
+		return false;
+	}
+	
+	public boolean testCase4() {
+
+		inputOrder = new LinkedHashMap<>();
+		output_list = new ArrayList<>();
+
+		// Adding Input Order
+		inputOrder.put("apple", (long) 3);
+
+		// Adding StorageCenter Data/Inventory Data
+		List<StorageCenter> StorageCenterList = new ArrayList<>();
+		
+		StorageCenter owd = new StorageCenter("owd");
+		owd.setStorageCenterStock("apple",(long) 1);
+		StorageCenterList.add(owd);
+
+		StorageCenter dm = new StorageCenter("dm");
+		dm.setStorageCenterStock("apple",(long) 1);
+		StorageCenterList.add(dm);
+
+		InventoryAllocator ia = new InventoryAllocator();
+
+		List<HashMap> result_list = ia.findCheapShipment(inputOrder, StorageCenterList);
+		//System.out.println(result_list.size());
+		
+		if(output_list.equals(result_list))
+			return true;
+		return false;
+	}
+	
+	public boolean testCase5() {
+
+		inputOrder = new LinkedHashMap<>();
+		output_list = new ArrayList<>();
+
+		// Adding Input Order
+		inputOrder.put("apple", (long) 0);
+
+		// Adding StorageCenter Data/Inventory Data
+		List<StorageCenter> StorageCenterList = new ArrayList<>();
+		
+		StorageCenter owd = new StorageCenter("owd");
+		owd.setStorageCenterStock("apple",(long) 1);
+		StorageCenterList.add(owd);
+
+		StorageCenter dm = new StorageCenter("dm");
+		dm.setStorageCenterStock("apple",(long) 1);
+		StorageCenterList.add(dm);
+
+		InventoryAllocator ia = new InventoryAllocator();
+
+		List<HashMap> result_list = ia.findCheapShipment(inputOrder, StorageCenterList);
+		//System.out.println(result_list.size());
+		
+		if(output_list.equals(result_list))
+			return true;
+		return false;
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public boolean testCase6() {
+
+		inputOrder = new LinkedHashMap<>();
+		output_list = new ArrayList<>();
+
+		// Adding Input Order
+		inputOrder.put("apple", (long) 5);
+		inputOrder.put("banana", (long) 5);
+		inputOrder.put("orange", (long) 20);
+
+		// Adding StorageCenter Data/Inventory Data
+		List<StorageCenter> StorageCenterList = new ArrayList<>();
+		
+		StorageCenter owd = new StorageCenter("owd");
+		owd.setStorageCenterStock("apple",(long) 5);
+		owd.setStorageCenterStock("banana",(long) 5);
+		owd.setStorageCenterStock("orange",(long) 10);
+		StorageCenterList.add(owd);
+		
+		StorageCenter dm = new StorageCenter("dm");
+		dm.setStorageCenterStock("apple",(long) 5);
+		dm.setStorageCenterStock("banana",(long) 5);
+		dm.setStorageCenterStock("orange",(long) 10);
+		StorageCenterList.add(dm);
+		
+		
+		InventoryAllocator ia = new InventoryAllocator();
+
+		List<HashMap> result_list = ia.findCheapShipment(inputOrder, StorageCenterList);
+		//System.out.println(result_list.size());
+		
+		for(HashMap<String,HashMap<String,Long>> tm : result_list) {
+			for(String in: tm.keySet()) {
+				System.out.println(in);
+				for(String ina: tm.get(in).keySet()) {
+					System.out.println(ina);
+					System.out.println(tm.get(in).get(ina));
+				}
+			}
+		}
+		
+		
+		//Adding the desired output
+
+		Map<String, HashMap<String, Long>> desiredMap = new LinkedHashMap<String, HashMap<String, Long>>();
+		HashMap<String, Long> temp_map=new LinkedHashMap<>();
+		temp_map.put("apple", (long) 5);
+		temp_map.put("banana", (long) 5);
+		temp_map.put("orange", (long) 10);
+		desiredMap.put("owd", temp_map);
+		output_list.add((HashMap) desiredMap);
+		
+		Map<String, HashMap<String, Long>> desiredMap2 = new LinkedHashMap<String, HashMap<String, Long>>();
+		HashMap<String, Long> temp_map2=new LinkedHashMap<>();
+		temp_map2.put("apple", (long) 0);
+		temp_map2.put("banana", (long) 0);
+		temp_map2.put("orange", (long) 10);
+		desiredMap2.put("owd", temp_map2);
+		output_list.add((HashMap) desiredMap);
+
+		//System.out.println(output_list.size());
+		
+		if(output_list.equals(result_list))
+			return true;
+		return false;
+	}
+
+	public static void main(String[] args) {
+		TestCases tcs = new TestCases();
+		System.out.println("testCase1: " + tcs.testCase1());
+		System.out.println("testCase2: " + tcs.testCase2());
+		System.out.println("testCase3: " + tcs.testCase3());
+		System.out.println("testCase4: " +  tcs.testCase4());
+		System.out.println("testCase5: " +  tcs.testCase5());
+		System.out.println("testCase6: " +  tcs.testCase6());
+	}
+}

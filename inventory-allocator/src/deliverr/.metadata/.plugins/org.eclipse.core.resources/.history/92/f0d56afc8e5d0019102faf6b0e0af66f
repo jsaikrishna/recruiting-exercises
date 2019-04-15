@@ -1,0 +1,73 @@
+package exercises;
+
+import java.util.*;
+
+public class InventoryAllocator {
+	
+	@SuppressWarnings("rawtypes")
+	public List<HashMap> findCheapShipment(HashMap<String,Long> inputOrder, List<StorageCenter> warehouseList){
+		
+		ArrayList<HashMap> result = new ArrayList<HashMap>();
+		Map<String, HashMap<String,Long>> resultMap = new LinkedHashMap<>();
+		
+		System.out.println("inputOrder.size(): " + inputOrder.size());
+		System.out.println("warehouseList.size(): " + warehouseList.size());
+		
+		if(warehouseList.size() == 0 || inputOrder.size() == 0)
+			return result;
+		
+		System.out.println("After input");
+		
+		for(String itemName : inputOrder.keySet()) {
+			System.out.println("itemName: " + itemName);
+			long itemQuantity = inputOrder.get(itemName);
+			System.out.println("itemQuantity: " + itemQuantity);
+			
+			if(itemQuantity > 0) {
+				for(int i=0;i<warehouseList.size();i++) {
+					StorageCenter wareHouse = warehouseList.get(i);
+					if(wareHouse.getStorageCenterStock().size() != 0) {
+						String wareHouseName = wareHouse.getStorageCenterName();
+						long itemCount = wareHouse.getStockCount(itemName);
+						if(itemCount <= 0)
+							continue;
+						if(itemQuantity <= 0)
+							break;
+						else if(itemCount >= itemQuantity) {
+							// if available item quantity is more than or equal to the required item quantity
+							HashMap<String,Long> current_map = resultMap.getOrDefault(wareHouseName, new LinkedHashMap<>());
+							current_map.put(itemName, itemCount);
+							resultMap.put(wareHouseName, current_map);
+							itemQuantity = 0;
+							break;
+						}
+						else {
+							// if available item quantity is less than the required item quantity
+							itemQuantity = itemQuantity - itemCount;
+							HashMap<String,Long> current_map = resultMap.getOrDefault(wareHouseName, new LinkedHashMap<>());
+							current_map.put(itemName, itemCount);
+							resultMap.put(wareHouseName, current_map);
+						}
+					}
+				}
+			}
+			if(itemQuantity!=0) {
+				// If there are not enough items available in storage center
+				result.clear();
+				return result;
+			}
+		}
+		
+		// Here adding all results in a final result list
+		for(String storageCenterName : resultMap.keySet()) {
+			HashMap<String,HashMap<String,Long>> temp_map = new LinkedHashMap<>();
+			temp_map.put(storageCenterName, resultMap.get(storageCenterName));
+			result.add(temp_map);
+		}
+		System.out.println("result.size()" + result.size());
+		
+		return result;
+		
+	}
+
+}

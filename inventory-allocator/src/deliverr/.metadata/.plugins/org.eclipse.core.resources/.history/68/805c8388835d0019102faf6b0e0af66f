@@ -1,0 +1,11 @@
+package exercises;
+
+import java.util.*;
+
+public class InventoryAllocator {
+	
+	public void findCheapShipment(HashMap<String,Long> inputOrder, List<StorageCenter> warehouse){
+		
+	}
+
+}
